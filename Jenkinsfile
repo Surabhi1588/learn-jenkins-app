@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             agent{
                 docker{
-                    image 'node:18-bullseye'
+                    image 'node:18-bullseye'    // or node:20-bullseye if compatible
+                    args '-u 0:0'               // run container as root to fix perm
                     reuseNode true
                 }
             }
