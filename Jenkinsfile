@@ -16,16 +16,16 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
-                    echo "=== Test DNS via ping ==="
-                    ping -c 1 registry.npmjs.org || true
-                    echo "=== Test DNS via curl ==="
-                    curl -I https://registry.npmjs.org || true
-                    npm install -g npm@latest
-                    npm ci
-                    npm run build
-                    ls -la
                 '''
             }
+        }
+        
+        stage('Test'){
+            steps{
+                echo 'Test stage'
+                sh 'test -f build/index.html'
+            }
+
         }
     }
 }
