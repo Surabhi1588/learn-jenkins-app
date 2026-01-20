@@ -15,6 +15,8 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
+                    nslookup registry.npmjs.org || true
+                    echo "=== RUNNING NPM ===      echo "=== RUNNING NPM ==="
                     npm install -g npm@6
                     npm ci
                     npm run build
