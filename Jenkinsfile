@@ -12,12 +12,15 @@ pipeline {
             }
             steps {
                 sh'''
+                    set -e
                     ls -la
                     node --version
                     npm --version
-                    nslookup registry.npmjs.org || true
-                    echo "=== RUNNING NPM ===      echo "=== RUNNING NPM ==="
-                    npm install -g npm@6
+                    echo "=== Test DNS via ping ==="
+                    ping -c 1 registry.npmjs.org || true
+                    echo "=== Test DNS via curl ==="
+                    curl -I https://registry.npmjs.org || true
+                    npm install -g npm@latest
                     npm ci
                     npm run build
                     ls -la
